@@ -11,7 +11,7 @@ A simple test for 2D side view movement (WASD) with collisions.
 Run Platformer\bin\index.html and enable flash player.
 
 ## Avoider
-Randomly generated obstacles with erratic path. Mouse movement
+Randomly generated obstacles with erratic path, mouse movement.
 Run Avoider\bin\index.html and enable flash player.
 
 ## Strategy
