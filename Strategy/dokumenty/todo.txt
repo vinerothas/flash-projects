@@ -1,0 +1,152 @@
+* transport armii
+* atakowanie
+	- laczenie atakow z wielu regionow (flanking bonus?)
+	- oddzielny ekran walki
+		- opis obecnej sytuacji
+			- opisac maneuver i flanking
+			- podac jakie taktyki zostaly wybrane i z jakim skutkiem
+		- grafika atakujacych regionow
+	- jezeli dwie armie atakuja siebie nawzajem, oblezenie jest przeksztalcone w bitwe
+	- jezeli dwie armie z roznych krajow atakuja ten sam region atakujacy wybiera co robic
+	- zrobic handling wielu armii mogacych uczestniczyc w wielu bitwach
+	- usuwanie strzalek przy nextWeek
+	- udany maneuver usuwa flanking
+	- bonus od zdolnosci generala
+	- flanking bonus dla AI
+	- ucieczka/odwrot jezeli AI atakuje i ma slabe szanse
+	- zrobic zeby AI nie wybieralo tych samych taktyk
+		- AI ma opcje skontrowania poprzedniego ataku gracza
+	- zrobic zeby attack i defense byly zalezne od advantage
+	- zwiekszony advantage jezeli przeciwnik nie szarzowal
+		- jedynie o 0.05 jezeli wykonany byl skirmish
+	- wieksze bonusy zaleznych od jednostek i taktyk
+	- maneuver jak counter skirmishu?
+	- zrobic zeby removeTotal w Army usuwalo podana ilosc
+* armie		
+	- generalowie bez armii wracaja do kapitolu, wysylanie generalow do regionow tworzy nowe, puste armie
+	- zolnierze umieraja
+	- slidery w shuffleFrame
+* dodac wiecej komentarzy do kodu
+	- opisac nazwy elementow znajdujacych sie we frameach w kodzie
+* budynki budowane surowcami
+	- oddzielny ekran do budowy budynkow	
+		- przycisk przy kazdym budynku wyjasniajacy doglebnie funkcje danego budynku
+		- budowanie wielu budynkow na raz
+		- zmiana priorytetow
+		- dodac wszystkie constructionFields do arrayu by mozna bylo usunac
+			w wypadku gdyby chcialo sie anulowac budowe
+
+		- ikona budynkow zbierajacych surowce
+		- okno informacyjne gdy wybiera sie budowe lecz ma sie za malo surowcow
+		- naprawic nazwy budynkow w current constructions
+* podzial na tygodnie, sezony i lata
+	- 8 tygodni na sezon
+	- sezony: lodu, wody, swiatla, ognia, ziemi, powietrza
+* opis obok sliderow w infoFrame
+* dodawac eventListener jedynie do regionow, ktore sa pod kontrola gracza?/developer tool
+	- ewentualnie mouseEnabled = false
+
+Pozniej:
+
+* zmiana koloru strzalki ataku w zaleznosci od regionu nad ktorym jest kursor?
+* ruler
+	- lista wolnych generalow
+	- zone: kapitol
+* ekran finansow gdzie jest pokazane ile kasy z plebejuszy i ile kasy na zolnierzy
+* okno doradcow podpowiadajacych co mozna zrobic
+	- doradzanie w sprawie budowania fabryk w miejscach gdzie jest duzy dostep do plebejuszy
+	- ostrzeganie przed niskimi zapasami i zagrozeniem glodem w regionach
+	- doradzanie gdzie jest malo garnizonu
+	- doradzanie gdzie rekrutacja powoduje spadek populacji
+		- jezeli sredni przyrost minus srednia rekrutacja i smierc mniejsze od zera
+* harvest lub spichlerz
+	- wiecej zapasow jedzenia, mniejszy spoil
+	- zmienic szanse na glod na ilosc tygodni na ktora starcza zapasy
+* podzial na tygodnie, sezony i lata
+	- sezony w ktorych mozna zebrac wiecej jedzenia?
+* populacja townspeople zalezna od "prosperity" regionu
+	- wiecej kasy z townspeople
+	- % przyrostu naturalnego jakim jest townspeople zalezny od "prosperity"
+* armyFrame
+	- pokazanie regionu wraz ze wszystkimi regionami sasiadujacymi?
+
+Zrobione:
+
+* zrobienie klasy gdzie mozna przesuwac wyswietlane wpisy
+	- uzyc w army frame przy armiach
+	- uzyc w obecnych konstrukcjach
+* atakowanie	
+	- oddzielny ekran walki
+		- wybor taktyki
+		- informacje o silach obu stron
+	- edytowanie ataku przy wybraniu tych samych regionow (ten sam screen)
+	- atakowanie jedynie sasiadujacych regionow
+	- nie mozna atakowac wiele razy w tym samym tygodniu tymi samymi armiami
+		- array w uI zawierajacy wszystkie ataki
+		- strzalki sa dodane przy wyjsciu z attackFrame
+	- cancel jezeli brak wybranych armii w ekranie atakowania
+	- okno informujace o braku armii do atakowania w attackFrame
+	- okno informacyjne jezeli probuje sie wybrac armie ktora juz jest wybrana do ataku innego regionu
+	- AI:
+		- znalezc ktora taktyka daje najwiecej attack power przy danej armii
+		- znalezc jaka taktyka jest korzystna dla gracza (wedlug punktu 1) i wybrac kontrtaktyke
+		- znalezc jakiej taktyki moze uzyc gracz i skontrowac go
+* zrobic klase attackTrail
+	- armyOrder ma var attackTrail
+* prioritizing - typy plebejuszy z priorytetem maja pierwszenstwo przy wypelnianiu ilosci procentowej
+* zbieranie jedzenie przed glodem w nextTurn()
+* getPlebeians() returnujaca wszystkie typy plebejuszy jako array by zaoszczedzic czas obliczen
+	- uzyc w updatePlebeianFields() w infoFrame
+* baraki
+	- nowi rekruci pojawiaja sie w garnizonie miasta
+	- zsumowane dane o wybranych armiach pod lista armii w regionie
+	- dodanie barakow do regionu
+	- mozliwosc wlaczenia/wylaczenia lub zmiany rekrutowania w 
+	- last week soldiers trained
+* armie
+	- atakowanie, attackFrame
+		- przyciski cancel i attack
+		- obrazek pokazujacy oba regiony podczas ataku i strzalka miedzy nimi		
+		- wybieranie, ktora armia ma atakowac
+		- dane o armii przeciwnika (zsumowane)
+		- jezeli brak armii do atakowania, pokazac napis no armies in this region
+		- pokazanie imion generalow w regionie przeciwnika		
+		- podpisy pod regionami
+	- przycisk laczenia dwoch armii w jedna
+	- przy klikaniu w army mode na region juz wybrany lub przytrzymujac shift otiwera sie okno pokazujace armie	
+	- dodac garnizon jako armia do zone	
+	- przycisk przechodzenia do wybranej armii w regionie
+	- przemieszczanie zolnierzy miedzy armiami
+	- zolnierze kosztuja pieniadze co tydzien
+* populacja = farmers + crafters + "others"??
+	- slidery reprezentuja procentowe wypelnienie fabryk, najpierw wolni plebejusze sa zamieniani w crafterow
+		a potem farmerzy
+	- na przyklad 100% wypelnienia fabryk czyli ilosc craftsmanow==ilosc farmerow jezeli populacji jest za malo
+	- jezeli populacji jest za duzo to na przyklad 20% craftsmanow 
+		oznacza ze 20% z maksymalnej pojemnosci fabryk to crafterzy
+* zrobic zeby nie dalo sie kliknac na region w infoFrame
+* generowanie surowcow
+	- wolni plebejusze produkuja zarowno surowce jak i jedzenie, lecz w mniejszej ilosci
+	- slider dla zmieniania ilosci minerow  i lumbermanow (jeden starczy poki sa tylko dwa surowce)
+	- gracz kontrolujacy region dostaje surowce
+* budynki
+	- dodac budowniczych, kolejny slider
+	- limitowanie farmerow i crafterow do ilosci budynkow
+	- oddzielny ekran do budowy budynkow	
+		- lista budynkow z kosztami	
+		- pokazanie ilosci builderow na limit builderow	
+		- lista priorytetow
+		- przycisk przy kazdym budynku by zbudowac
+		- zapisac id, nazwe i czas jaki zostal do ukonczenia budowy jako Number
+			id ma byc uzywane jedynie podczas anulowania i ukonczenia budowy
+			klasa buildingsList musi zostac aby moc jej uzyc w nextTurn()
+		
+		- cofniecie do poprzedniego ekranu i zupelne wyjscie z regionu
+	- budynki potrzebuja: budowniczych (limit ilu moze budowac na raz), czas, kamien, drewno, pieniadze
+	- dodac pieniadze (treasury)
+	- dodac budowanie do nextTurn()
+	- pokazac czas po jakim budynek zostanie zbudowany przy OBECNEJ liczbie budowniczych
+	- przyciski przelaczajace miedzy roznymi typami budynkow: armia, surowce
+* dodac wiecej komentarzy do kodu
+	- opisac build frame
+	- opisac info frame

@@ -1,0 +1,193 @@
+			if (newY == player.y)
+			{
+				moveY = false;
+				if (luCol)
+				{
+					moveX = false;
+				}
+				else if (rdCol)
+				{
+					moveX = false;
+				}
+				if (level.rows[newPosY2 + 1][newPosX2] == 0 && level.rows[newPosY2 + 1][newPosX] == 0)
+				{
+					player.inAir = true;
+					player.velocityY = gravity;
+				}
+			}
+			else
+			{
+				if ((luCol && ldCol) || (luCol && !(luCol && ruCol)) || (ldCol && !(ldCol && rdCol)))
+					moveX = false;
+				else if ((ruCol && rdCol) || (ruCol && !(luCol && ruCol)) || (rdCol && !(ldCol && rdCol)))
+					moveX = false;
+				if ((luCol && ruCol) || (luCol && !(luCol && ldCol)) || (ruCol && !(ruCol && rdCol)))
+				{
+					if (player.velocityY < 0)
+						player.velocityY = -player.velocityY / 2;
+					moveY = false;
+				}
+				else if ((ldCol && rdCol) || (ldCol && !(luCol && ldCol)) || (rdCol && !(ruCol && rdCol)))
+				{
+					player.velocityY = 0;
+					player.inAir = false;
+					moveY = false;
+				}
+				
+			}
+			
+			if (!moveX || !moveY)
+			{
+				moveX = true;
+				newPosY = Math.floor(player.y + 0.1) / blockSize;
+				//newPosX = Math.floor(newX + 0.1) / blockSize;
+				newPosY2 = Math.floor(player.y + player.playerHeight - 0.1) / blockSize;
+				//newPosX2:int = Math.floor(newX2 - 0.1) / blockSize;
+				
+				luCol = level.rows[newPosY][newPosX] == 1;
+				ldCol = level.rows[newPosY2][newPosX] == 1;
+				ruCol = level.rows[newPosY][newPosX2] == 1;
+				rdCol = level.rows[newPosY2][newPosX2] == 1;
+				
+				if ((luCol && ldCol) || (luCol && !(luCol && ruCol)) || (ldCol && !(ldCol && rdCol)))
+					moveX = false;
+				else if ((ruCol && rdCol) || (ruCol && !(luCol && ruCol)) || (rdCol && !(ldCol && rdCol)))
+					moveX = false;
+				
+				if (moveX == false)
+				{
+					moveY = true;
+					
+					newPosY = Math.floor(newY + 0.1) / blockSize;
+					newPosX = Math.floor(player.x + 0.1) / blockSize;
+					newPosY2 = Math.floor(newY2 - 0.1) / blockSize;
+					newPosX2 = Math.floor(player.x + player.playerWidth - 0.1) / blockSize;
+					
+					luCol = level.rows[newPosY][newPosX] == 1;
+					ldCol = level.rows[newPosY2][newPosX] == 1;
+					ruCol = level.rows[newPosY][newPosX2] == 1;
+					rdCol = level.rows[newPosY2][newPosX2] == 1;
+					if ((luCol && ruCol) || (luCol && !(luCol && ldCol)) || (ruCol && !(ruCol && rdCol)))
+					{
+						if (player.velocityY < 0)
+							player.velocityY = -player.velocityY / 2;
+						moveY = false;
+					}
+					else if ((ldCol && rdCol) || (ldCol && !(luCol && ldCol)) || (rdCol && !(ruCol && rdCol)))
+					{
+						player.velocityY = 0;
+						player.inAir = false;
+						moveY = false;
+					}
+				}
+				
+			}
+			
+			if (moveX)
+				player.x = newX;
+			else
+			{
+				if (player.x < newX)
+					player.x = (newPosX * blockSize) + player.playerWidth;
+				else if (player.x > newX)
+					player.x = newPosX * blockSize;
+			}
+			if (moveY)
+				player.y = newY;
+			else if (newY != player.y)
+			{
+				if (player.y > newY)
+					player.y = newPosY * blockSize;
+				else if (player.y < newY)
+					player.y = (newPosY * blockSize) + player.playerHeight;
+			}
+
+
+			rows[0] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+			rows[1] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[2] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[3] = [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[4] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1];
+			rows[5] = [1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[6] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[7] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[8] = [1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[9] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[10] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1];
+			rows[11] = [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[12] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[13] = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+			rows[14] = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+
+
+			if (newY == player.y) {
+					moveY = false;
+					if (level.rows[newPosX][newPosY] == 1) moveX = false;
+					else if (level.rows[newPosX2][newPosY]==1) moveX = false;
+			}else {
+				trace("a"+player.y);
+				if (level.rows[newPosX][newPosY] == 1 && level.rows[newPosX][newPosY2] == 1) moveX = false;
+				else if (level.rows[newPosX2][newPosY] == 1 && level.rows[newPosX2][newPosY2] == 1) moveX = false;
+				if (level.rows[newPosX][newPosY] == 1 && level.rows[newPosX2][newPosY] == 1) {
+					trace("b");
+					player.velocityY = -player.velocityY / 2;
+					moveY = false;
+				}else if (level.rows[newPosX][newPosY2] == 1 && level.rows[newPosX2][newPosY2] == 1) {
+					trace("c");
+					player.velocityY = 0;
+					player.inAir = false;
+				}
+				
+			}
+
+
+
+			if (rightHeld == true && leftHeld == false)
+			{
+				if (player.x < screenWidth - player.playerWidth)
+				{
+					var newX:Number = player.velocityX + player.x;
+					if (newX <= screenWidth - player.playerWidth)
+						player.x = newX;
+					else
+						player.x = screenWidth - player.playerWidth;
+				}
+			}
+			else if (leftHeld == true && rightHeld == false)
+			{
+				if (player.x > 0)
+				{
+					var newX2:Number = -player.velocityX + player.x;
+					if (newX2 >= 0)
+						player.x = newX2;
+					else
+						player.x = 0;
+				}
+			}
+			
+			if (player.inAir == true)
+			{
+				var newY:Number = player.y + player.velocityY;
+				if (newY + player.playerHeight >= screenHeight)
+				{
+					player.y = screenHeight - player.playerHeight;
+					player.inAir = false;
+					player.velocityY = 0;
+				}
+				else if (newY < 0)
+				{
+					player.y = 0;
+					player.velocityY = -player.velocityY / 2;
+				}
+				else
+				{
+					player.y = newY;
+					player.velocityY = player.velocityY + 0.80;
+				}
+			}
+			else if (jumpHeld == true)
+			{
+				player.inAir = true;
+				player.velocityY = -19;
+			}
