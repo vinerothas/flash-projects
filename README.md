@@ -1,10 +1,11 @@
 # flash-projects
 
 My old projects written in Adobe Flash using AC3.
-I no longer own Adobe Flash so the projects are presented in their old wonky state.
-Some other notable projects that I can no longer find/run include a random
-generation of a top-down dungeon/maze and a zombie defense game with a stationary turret
-and animated enemies.
+I no longer own Adobe Flash so the projects are presented in their old wonky state.  
+
+## Crawler
+Navigate 10 randomly generated mazes as quickly as possible. The movement is very quick, so it's best to slide into turns by holding two buttons (forward and turn) at the same times. WASD or arrow keys to move.
+Run Dungeon Crawler\crawler.swf using a shockwave flash player (I recommend http://www.swffileplayer.com/).
 
 ## Platformer
 A simple test for 2D side view movement (WASD) with collisions.
